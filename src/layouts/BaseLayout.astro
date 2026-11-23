@@ -10,6 +10,7 @@ interface Props {
   description?: string;
   image?: string;
   sectionIndex?: string;
+  showLoader?: boolean;
 }
 
 const {
@@ -17,6 +18,7 @@ const {
   description = siteConfig.description,
   image = '/favicon.svg',
   sectionIndex = '00',
+  showLoader = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -78,16 +80,31 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <a href="#main-content" class="skip">Skip to main content</a>
 
     <!-- Page Transition Loader -->
-    <div id="loader" aria-hidden="true">
-      <div id="loader-panels">
-        <div class="loader-panel" id="lp-l"></div>
-        <div class="loader-panel" id="lp-r"></div>
-      </div>
-      <div id="loader-name">
-        <span>p</span><span>h</span><span>d</span><span>&nbsp;</span><span>f</span><span>o</span><span>r</span><span>&nbsp;</span><span>l</span><span>i</span><span>f</span><span>e</span>
-      </div>
-      <div id="loader-bar"></div>
-    </div>
+    {
+      showLoader && (
+        <div id="loader" aria-hidden="true">
+          <div id="loader-panels">
+            <div class="loader-panel" id="lp-l" />
+            <div class="loader-panel" id="lp-r" />
+          </div>
+          <div id="loader-name">
+            <span>p</span>
+            <span>h</span>
+            <span>d</span>
+            <span>&nbsp;</span>
+            <span>f</span>
+            <span>o</span>
+            <span>r</span>
+            <span>&nbsp;</span>
+            <span>l</span>
+            <span>i</span>
+            <span>f</span>
+            <span>e</span>
+          </div>
+          <div id="loader-bar" />
+        </div>
+      )
+    }
 
     <!-- Film Grain Canvas -->
     <canvas id="grain"></canvas>
@@ -104,9 +121,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <script>
       import { initFilmGrain } from '../scripts/starfield';
-      import { initMagneticButtons, initCodeCopy } from '../scripts/motion';
+      import { initMagneticButtons, initCodeCopy, initLenis } from '../scripts/motion';
 
-      // Always initialize canvas grain, magnetic buttons, and code copy
+      // Always initialize smooth scroll, canvas grain, magnetic buttons, and code copy
+      initLenis();
       initFilmGrain();
       initMagneticButtons();
       initCodeCopy();
