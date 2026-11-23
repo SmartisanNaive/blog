@@ -6,10 +6,8 @@ export interface NavItem {
 
 export const siteConfig = {
   name: 'phd for life',
-  domain: 'phd4life.com',
-  blogDomain: 'blog.phd4life.com',
-  url: 'https://phd4life.com',
-  blogUrl: 'https://blog.phd4life.com',
+  domain: 'blog.phd4life.com',
+  url: 'https://blog.phd4life.com',
   author: 'Baice',
   email: 'flashover@foxmail.com',
   github: 'https://github.com/SmartisanNaive',
@@ -42,7 +40,7 @@ export const siteConfig = {
     {
       num: '03',
       name: 'RSS',
-      handle: 'phd4life.com/rss.xml',
+      handle: 'blog.phd4life.com/rss.xml',
       note: 'Subscribe to new posts',
       url: '/rss.xml',
       external: false,

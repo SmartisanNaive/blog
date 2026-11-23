@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://phd4life.com/sitemap-index.xml
+Sitemap: https://blog.phd4life.com/sitemap-index.xml

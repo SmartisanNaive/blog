@@ -1,11 +1,10 @@
-# phd for life (`phd4life.com`)
+# phd for life (`blog.phd4life.com`)
 
 > Digital garden and engineering log for AI4Science projects, autonomous agentic workflows, NLP & deep learning experiments, and synthetic biology notes.
 
 [English](./README.md) | [简体中文](./docs/README_zh.md)
 
-[![Site](https://img.shields.io/badge/website-phd4life.com-2dd4bf?style=flat-square)](https://phd4life.com)
-[![Blog](https://img.shields.io/badge/blog-blog.phd4life.com-2dd4bf?style=flat-square)](https://blog.phd4life.com)
+[![Website](https://img.shields.io/badge/website-blog.phd4life.com-2dd4bf?style=flat-square)](https://blog.phd4life.com)
 [![Built with Astro](https://img.shields.io/badge/built%20with-Astro%205-ff5d01?style=flat-square)](https://astro.build)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](./LICENSE)
 

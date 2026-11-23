@@ -7,7 +7,7 @@ import rehypeKatex from 'rehype-katex';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://phd4life.com',
+  site: 'https://blog.phd4life.com',
   output: 'static',
   trailingSlash: 'never',
   integrations: [mdx(), sitemap()],

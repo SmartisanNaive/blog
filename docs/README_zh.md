@@ -1,11 +1,10 @@
-# phd for life (`phd4life.com`)
+# phd for life (`blog.phd4life.com`)
 
 > 聚焦于 AI for Science、自动化智能体（Agents）、NLP / 机器学习与合成生物学的高性能现代静态博客与个人主页。
 
 [English](../README.md) | [简体中文](./README_zh.md)
 
-[![Site](https://img.shields.io/badge/website-phd4life.com-2dd4bf?style=flat-square)](https://phd4life.com)
-[![Blog](https://img.shields.io/badge/blog-blog.phd4life.com-2dd4bf?style=flat-square)](https://blog.phd4life.com)
+[![Website](https://img.shields.io/badge/website-blog.phd4life.com-2dd4bf?style=flat-square)](https://blog.phd4life.com)
 [![Built with Astro](https://img.shields.io/badge/built%20with-Astro%205-ff5d01?style=flat-square)](https://astro.build)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](../LICENSE)
 
