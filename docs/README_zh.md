@@ -37,7 +37,7 @@
 - **内容引擎**：Astro Content Collections（Zod 强类型模式校验）
 - **排版与代码**：Shiki（`github-dark` 主题）、`remark-math`、`rehype-katex`
 - **动效库**：Three.js、GSAP 3、Lenis
-- **包管理**：pnpm
+- **包管理**：Bun
 
 ## 目录结构
 
@@ -66,8 +66,7 @@
 
 ### 环境依赖
 
-- Node.js 20+
-- pnpm 10+
+- Bun 1.1+（或 Node.js 20+）
 
 ### 本地运行
 
@@ -77,10 +76,10 @@ git clone https://github.com/SmartisanNaive/blog.git
 cd blog
 
 # 安装依赖
-pnpm install
+bun install
 
 # 启动本地开发服务
-pnpm dev
+bun dev
 ```
 
 在浏览器中打开 `http://localhost:4321` 即可预览。
@@ -89,10 +88,10 @@ pnpm dev
 
 ```bash
 # 构建纯静态产物至 dist/ 目录
-pnpm build
+bun run build
 
 # 本地静态预览
-pnpm preview
+bun run preview
 ```
 
 ## 托管部署
@@ -101,9 +100,9 @@ pnpm preview
 
 - **腾讯云 EdgeOne Pages**：
   - Framework Preset：`Astro`
-  - Build Command：`pnpm build`
+  - Build Command：`bun run build`
   - Output Directory：`dist`
-  - Node.js Version：`20.x` 或以上
+  - Node.js Version：`20.x`（或选择 Bun 预设）
 - **Cloudflare Pages / Vercel**：同理开箱即用，构建后自动进行全球 CDN 边缘节点分发。
 
 ## 开源协议

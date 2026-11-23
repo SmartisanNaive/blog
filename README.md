@@ -38,7 +38,7 @@ The design uses an obsidian and teal palette inspired by deep-sky cartography:
 - **Content Engine**: Astro Content Collections with Zod schemas
 - **Code & Math**: Shiki (`github-dark`), `remark-math`, `rehype-katex`
 - **Animations**: Three.js, GSAP 3, Lenis
-- **Package Manager**: pnpm
+- **Package Manager**: Bun (or Node.js)
 
 ## Project Structure
 
@@ -65,8 +65,7 @@ The design uses an obsidian and teal palette inspired by deep-sky cartography:
 
 ### Prerequisites
 
-- Node.js 20+
-- pnpm 10+
+- Bun 1.1+ (or Node.js 20+)
 
 ### Installation & Local Development
 
@@ -76,10 +75,10 @@ git clone https://github.com/SmartisanNaive/blog.git
 cd blog
 
 # Install dependencies
-pnpm install
+bun install
 
 # Start development server
-pnpm dev
+bun dev
 ```
 
 Visit `http://localhost:4321` in your browser.
@@ -88,10 +87,10 @@ Visit `http://localhost:4321` in your browser.
 
 ```bash
 # Build static files to dist/
-pnpm build
+bun run build
 
 # Preview production build locally
-pnpm preview
+bun run preview
 ```
 
 ## Deployment
@@ -100,9 +99,9 @@ The project builds to a standalone static `dist/` directory with zero runtime se
 
 - **Tencent Cloud EdgeOne Pages**:
   - Framework: Astro
-  - Build command: `pnpm build`
+  - Build command: `bun run build`
   - Output directory: `dist`
-  - Node version: 20+
+  - Node version: 20+ (or Bun)
 - **Cloudflare Pages / Vercel**: Fully compatible out of the box with the same static settings.
 
 ## License
