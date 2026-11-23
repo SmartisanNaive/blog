@@ -7,7 +7,9 @@ export interface NavItem {
 export const siteConfig = {
   name: 'phd for life',
   domain: 'phd4life.com',
+  blogDomain: 'blog.phd4life.com',
   url: 'https://phd4life.com',
+  blogUrl: 'https://blog.phd4life.com',
   author: 'Baice',
   email: 'flashover@foxmail.com',
   github: 'https://github.com/SmartisanNaive',
@@ -32,7 +34,7 @@ export const siteConfig = {
     {
       num: '02',
       name: 'Blog',
-      handle: 'phd4life.com/blog',
+      handle: 'blog.phd4life.com',
       note: 'Field notes, workflows & engineering logs',
       url: '/blog',
       external: false,
