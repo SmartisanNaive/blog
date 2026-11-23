@@ -1,0 +1,362 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import '../styles/prose.css';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  tags: string[];
+  headings?: Heading[];
+  prevPost?: { id: string; title: string };
+  nextPost?: { id: string; title: string };
+  contentRaw?: string;
+}
+
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  tags = [],
+  headings = [],
+  prevPost,
+  nextPost,
+  contentRaw = '',
+} = Astro.props;
+
+// Calculate estimated reading time
+const wordCount = contentRaw.trim().split(/\s+/).length;
+const readingTimeMin = Math.max(1, Math.ceil(wordCount / 200));
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+}
+---
+
+<BaseLayout title={`${title} — phd for life`} description={description} sectionIndex="BLOG">
+  <article class="post-container">
+    <header class="post-header">
+      <div class="header-inner">
+        <a href="/blog" class="back-link">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Back to field notes</span>
+        </a>
+
+        <div class="post-meta">
+          <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+          <span class="meta-dot">&middot;</span>
+          <span>{readingTimeMin} min read</span>
+          {
+            updatedDate && (
+              <>
+                <span class="meta-dot">&middot;</span>
+                <span>Updated {formatDate(updatedDate)}</span>
+              </>
+            )
+          }
+        </div>
+
+        <h1 class="post-title">{title}</h1>
+        <p class="post-lead">{description}</p>
+
+        <div class="tag-cloud post-tags">
+          {
+            tags.map((tag) => (
+              <a href={`/blog/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`} class="tag">
+                {tag}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </header>
+
+    <div class="post-layout">
+      <!-- Optional Table of Contents for headings depth 2 & 3 -->
+      {
+        headings.length > 1 && (
+          <aside class="post-toc-sidebar" aria-label="Table of Contents">
+            <div class="toc-sticky">
+              <span class="toc-title">CONTENTS</span>
+              <ul class="toc-list">
+                {headings
+                  .filter((h) => h.depth <= 3)
+                  .map((h) => (
+                    <li class={`toc-item depth-${h.depth}`}>
+                      <a href={`#${h.slug}`}>{h.text}</a>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          </aside>
+        )
+      }
+
+      <!-- Main Prose Content -->
+      <div class="post-content prose">
+        <slot />
+      </div>
+    </div>
+
+    <!-- Prev / Next Post Navigation -->
+    <nav class="post-nav" aria-label="Post Navigation">
+      <div class="post-nav-inner">
+        {
+          prevPost ? (
+            <a href={`/blog/${prevPost.id}`} class="nav-prev">
+              <span class="nav-direction">&larr; PREVIOUS NOTE</span>
+              <span class="nav-post-title">{prevPost.title}</span>
+            </a>
+          ) : (
+            <div />
+          )
+        }
+
+        {
+          nextPost ? (
+            <a href={`/blog/${nextPost.id}`} class="nav-next">
+              <span class="nav-direction">NEXT NOTE &rarr;</span>
+              <span class="nav-post-title">{nextPost.title}</span>
+            </a>
+          ) : (
+            <div />
+          )
+        }
+      </div>
+    </nav>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-container {
+    padding-top: clamp(6.5rem, 12vh, 9rem);
+    padding-bottom: 7rem;
+  }
+
+  .post-header {
+    border-bottom: 1px solid var(--rim);
+    padding: 0 var(--ph) clamp(3.5rem, 6vh, 5rem);
+    margin-bottom: 4rem;
+  }
+
+  .header-inner {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    color: var(--teal);
+    font-family: var(--mono);
+    text-decoration: none;
+    margin-bottom: 2.2rem;
+    transition: opacity 0.2s;
+  }
+
+  .back-link:hover {
+    opacity: 0.8;
+  }
+
+  .back-link svg {
+    width: 13px;
+    height: 13px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.2;
+    transition: transform 0.2s var(--ease);
+  }
+
+  .back-link:hover svg {
+    transform: translateX(-3px);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.72rem;
+    color: var(--mid);
+    font-family: var(--mono);
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .meta-dot {
+    color: var(--dim);
+  }
+
+  .post-title {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 5vw, 4.2rem);
+    font-weight: 200;
+    font-style: italic;
+    color: #ffffff;
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+    margin-bottom: 1.5rem;
+  }
+
+  .post-lead {
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    color: var(--mid);
+    line-height: 1.6;
+    margin-bottom: 2.2rem;
+    font-weight: 300;
+  }
+
+  .post-tags {
+    margin-top: 1rem;
+  }
+
+  .post-layout {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--ph);
+    display: flex;
+    gap: 4rem;
+    position: relative;
+    justify-content: center;
+  }
+
+  .post-toc-sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    display: block;
+  }
+
+  .toc-sticky {
+    position: sticky;
+    top: 7rem;
+    padding-left: 1rem;
+    border-left: 1px solid var(--rim);
+  }
+
+  .toc-title {
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-family: var(--mono);
+    margin-bottom: 1rem;
+  }
+
+  .toc-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .toc-item a {
+    font-size: 0.78rem;
+    color: var(--mid);
+    text-decoration: none;
+    line-height: 1.4;
+    transition: color 0.2s;
+  }
+
+  .toc-item.depth-3 {
+    padding-left: 0.75rem;
+  }
+
+  .toc-item a:hover {
+    color: var(--prose);
+  }
+
+  .post-content {
+    flex: 1;
+    max-width: 72ch;
+    margin: 0;
+  }
+
+  /* Navigation between posts */
+  .post-nav {
+    max-width: 820px;
+    margin: 5rem auto 0;
+    padding: 3rem var(--ph) 0;
+    border-top: 1px solid var(--rim);
+  }
+
+  .post-nav-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .nav-prev,
+  .nav-next {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-decoration: none;
+    padding: 1.5rem;
+    background: var(--bg2);
+    border: 1px solid var(--rim);
+    border-radius: 4px;
+    transition:
+      border-color 0.2s,
+      transform 0.25s var(--ease);
+  }
+
+  .nav-next {
+    text-align: right;
+  }
+
+  .nav-prev:hover,
+  .nav-next:hover {
+    border-color: rgba(45, 212, 191, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .nav-direction {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-family: var(--mono);
+  }
+
+  .nav-post-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--prose);
+    line-height: 1.4;
+    font-weight: 200;
+  }
+
+  @media (max-width: 1024px) {
+    .post-toc-sidebar {
+      display: none;
+    }
+    .post-content {
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .post-nav-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

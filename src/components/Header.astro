@@ -1,0 +1,188 @@
+---
+import { siteConfig } from '../data/site';
+
+interface Props {
+  sectionIndex?: string;
+}
+
+const { sectionIndex = '00' } = Astro.props;
+---
+
+<header>
+  <nav id="main-nav" aria-label="Main Navigation">
+    <a href="/" class="nav-logo" aria-label="phd for life Homepage">
+      phd for life
+    </a>
+
+    <div class="nav-right">
+      <span class="nav-index" id="nav-index" aria-label="Current Section">{sectionIndex}</span>
+
+      <div class="nav-links">
+        <a href="/#projects" class="nav-link">Projects</a>
+        <a href="/#workflows" class="nav-link">Workflows</a>
+        <a href="/blog" class="nav-link">Blog</a>
+      </div>
+
+      <a
+        href={siteConfig.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-cta"
+        aria-label="GitHub Profile (opens in new tab)"
+      >
+        <span>GitHub</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <line x1="7" y1="17" x2="17" y2="7"></line>
+          <polyline points="7 7 17 7 17 17"></polyline>
+        </svg>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 500;
+    padding: 1.4rem var(--ph);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: padding 0.3s var(--ease);
+  }
+
+  nav::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(6, 6, 10, 0.72);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--rim);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  :global(nav.scrolled)::after {
+    opacity: 1;
+  }
+
+  :global(nav.scrolled) {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 200;
+    font-style: italic;
+    color: var(--prose);
+    text-decoration: none;
+    letter-spacing: -0.015em;
+    transition: color 0.2s;
+  }
+
+  .nav-logo:hover {
+    color: var(--teal);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 2.2rem;
+  }
+
+  .nav-index {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal-dim);
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+    font-family: var(--mono);
+    min-width: 3ch;
+    transition: color 0.3s;
+  }
+
+  :global(nav.scrolled) .nav-index {
+    color: var(--teal);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+  }
+
+  .nav-link {
+    font-size: 0.8rem;
+    color: var(--mid);
+    text-decoration: none;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover {
+    color: var(--prose);
+  }
+
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--teal);
+    text-decoration: none;
+    font-family: var(--sans);
+    letter-spacing: 0.03em;
+    position: relative;
+    padding-bottom: 2px;
+  }
+
+  .nav-cta::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--teal);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s var(--ease);
+  }
+
+  .nav-cta:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .nav-cta svg {
+    width: 11px;
+    height: 11px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.2;
+    transition: transform 0.2s var(--ease);
+  }
+
+  .nav-cta:hover svg {
+    transform: translate(2px, -2px);
+  }
+
+  @media (max-width: 680px) {
+    .nav-links {
+      display: none;
+    }
+    .nav-right {
+      gap: 1.25rem;
+    }
+  }
+</style>

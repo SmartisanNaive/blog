@@ -1,0 +1,121 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { siteConfig } from '../data/site';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  sectionIndex?: string;
+}
+
+const {
+  title = siteConfig.title,
+  description = siteConfig.description,
+  image = '/favicon.svg',
+  sectionIndex = '00',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={siteConfig.author} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.site)} />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- KaTeX CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+      crossorigin="anonymous"
+    />
+
+    <!-- Favicon & Feed -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title={siteConfig.name} href="/rss.xml" />
+    <meta name="theme-color" content="#06060a" />
+
+    <!-- Schema.org JSON-LD -->
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: siteConfig.author,
+        url: siteConfig.url,
+        jobTitle: 'AI4Science & Autonomous Systems Engineer',
+        sameAs: [siteConfig.github, `${siteConfig.url}/blog`],
+      })}
+    />
+  </head>
+  <body>
+    <a href="#main-content" class="skip">Skip to main content</a>
+
+    <!-- Page Transition Loader -->
+    <div id="loader" aria-hidden="true">
+      <div id="loader-panels">
+        <div class="loader-panel" id="lp-l"></div>
+        <div class="loader-panel" id="lp-r"></div>
+      </div>
+      <div id="loader-name">
+        <span>p</span><span>h</span><span>d</span><span>&nbsp;</span><span>4</span><span>&nbsp;</span><span>l</span><span>i</span><span>f</span><span>e</span>
+      </div>
+      <div id="loader-bar"></div>
+    </div>
+
+    <!-- Film Grain Canvas -->
+    <canvas id="grain"></canvas>
+
+    <!-- Global Navigation -->
+    <Header sectionIndex={sectionIndex} />
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <!-- Global Footer -->
+    <Footer />
+
+    <script>
+      import { initFilmGrain } from '../scripts/starfield';
+      import { initMagneticButtons, initCodeCopy } from '../scripts/motion';
+
+      // Always initialize canvas grain, magnetic buttons, and code copy
+      initFilmGrain();
+      initMagneticButtons();
+      initCodeCopy();
+    </script>
+  </body>
+</html>

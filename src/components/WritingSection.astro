@@ -1,0 +1,226 @@
+---
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const latestPosts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 4);
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+}
+---
+
+<section class="section" id="writing" data-section="06" aria-label="Latest Technical Writing">
+  <div class="section-inner">
+    <div class="sec-kicker">
+      <span class="sec-num">06</span>
+      <span class="sec-label">WRITING</span>
+    </div>
+
+    <div class="writing-header">
+      <h2 class="sec-h writing-h">
+        <span class="clip-wrap">
+          <span class="clip-inner">Notes from the lab</span>
+        </span>
+        <span class="clip-wrap">
+          <span class="clip-inner roman">and terminal.</span>
+        </span>
+      </h2>
+
+      <a href="/blog" class="writing-all-btn">
+        <span>View all posts</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <line x1="7" y1="17" x2="17" y2="7"></line>
+          <polyline points="7 7 17 7 17 17"></polyline>
+        </svg>
+      </a>
+    </div>
+
+    <div class="writing-grid">
+      {
+        latestPosts.map((post) => (
+          <article class="writing-card">
+            <a href={`/blog/${post.id}`} class="card-hitbox">
+              <span class="card-date">{formatDate(post.data.pubDate)}</span>
+              <h3 class="card-title">{post.data.title}</h3>
+              <p class="card-desc">{post.data.description}</p>
+            </a>
+
+            <div class="card-footer">
+              <div class="tag-cloud">
+                {post.data.tags.map((tag) => (
+                  <a href={`/blog/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`} class="tag">
+                    {tag}
+                  </a>
+                ))}
+              </div>
+
+              <a href={`/blog/${post.id}`} class="card-read-more" aria-label={`Read ${post.data.title}`}>
+                <span>Read note</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .writing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: clamp(3rem, 6vh, 5.5rem);
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .writing-h {
+    margin-bottom: 0;
+  }
+
+  .writing-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--teal);
+    font-family: var(--sans);
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .writing-all-btn:hover {
+    border-color: var(--teal);
+  }
+
+  .writing-all-btn svg {
+    width: 12px;
+    height: 12px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.2;
+    transition: transform 0.2s var(--ease);
+  }
+
+  .writing-all-btn:hover svg {
+    transform: translate(2px, -2px);
+  }
+
+  .writing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .writing-card {
+    background: var(--bg2);
+    border: 1px solid var(--rim);
+    padding: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition:
+      border-color 0.3s,
+      transform 0.4s var(--ease);
+    position: relative;
+  }
+
+  .writing-card:hover {
+    border-color: rgba(45, 212, 191, 0.3);
+    transform: translateY(-3px);
+  }
+
+  .card-hitbox {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    flex: 1;
+  }
+
+  .card-date {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-family: var(--mono);
+    margin-bottom: 0.85rem;
+  }
+
+  .card-title {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    font-weight: 200;
+    font-style: italic;
+    color: var(--prose);
+    line-height: 1.35;
+    margin-bottom: 0.85rem;
+    letter-spacing: -0.015em;
+    transition: color 0.2s;
+  }
+
+  .writing-card:hover .card-title {
+    color: var(--teal);
+  }
+
+  .card-desc {
+    font-size: 0.88rem;
+    color: var(--mid);
+    line-height: 1.65;
+    margin-bottom: 1.75rem;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--rim);
+    padding-top: 1.25rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .card-read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.72rem;
+    color: var(--teal);
+    text-decoration: none;
+  }
+
+  .card-read-more svg {
+    width: 11px;
+    height: 11px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.2;
+    transition: transform 0.2s var(--ease);
+  }
+
+  .card-read-more:hover svg {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 768px) {
+    .writing-grid {
+      grid-template-columns: 1fr;
+    }
+    .writing-card {
+      padding: 1.75rem 1.5rem;
+    }
+  }
+</style>

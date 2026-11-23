@@ -1,0 +1,139 @@
+---
+import { workflows } from '../data/workflows';
+---
+
+<section class="section" id="workflows" data-section="05" aria-label="Personal Workflows">
+  <div class="section-inner">
+    <div class="sec-kicker">
+      <span class="sec-num">05</span>
+      <span class="sec-label">WORKFLOWS</span>
+    </div>
+
+    <h2 class="sec-h">
+      <span class="clip-wrap">
+        <span class="clip-inner">How I actually</span>
+      </span>
+      <span class="clip-wrap">
+        <span class="clip-inner"><em>build and automate.</em></span>
+      </span>
+    </h2>
+
+    <div class="workflows-container">
+      {
+        workflows.map((wf) => (
+          <div class="workflow-card">
+            <div class="wf-header">
+              <span class="wf-num">{wf.num}</span>
+              <span class="wf-kicker">{wf.subtitle}</span>
+            </div>
+
+            <h3 class="wf-title">{wf.title}</h3>
+            <p class="wf-desc">{wf.description}</p>
+
+            <div class="tag-cloud">
+              {wf.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .workflows-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .workflow-card {
+    background: var(--bg2);
+    border: 1px solid var(--rim);
+    padding: 2.5rem 2.25rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition:
+      border-color 0.3s,
+      transform 0.4s var(--ease);
+  }
+
+  .workflow-card:hover {
+    border-color: rgba(45, 212, 191, 0.25);
+    transform: translateY(-4px);
+  }
+
+  .workflow-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--teal) 0%, transparent 80%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .workflow-card:hover::before {
+    opacity: 0.8;
+  }
+
+  .wf-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.75rem;
+  }
+
+  .wf-num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 100;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.3);
+    line-height: 1;
+  }
+
+  .wf-kicker {
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-family: var(--mono);
+    text-align: right;
+  }
+
+  .wf-title {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    font-weight: 200;
+    font-style: italic;
+    color: var(--prose);
+    line-height: 1.3;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.015em;
+  }
+
+  .wf-desc {
+    font-size: 0.88rem;
+    color: var(--mid);
+    line-height: 1.75;
+    flex: 1;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 900px) {
+    .workflows-container {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    .workflow-card {
+      padding: 2rem 1.75rem;
+    }
+  }
+</style>

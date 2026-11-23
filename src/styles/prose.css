@@ -1,0 +1,213 @@
+/* ════════════════════════════════════════
+   PROSE / BLOG TYPOGRAPHY & CODE & MATH
+════════════════════════════════════════ */
+.prose {
+  max-width: 72ch;
+  margin: 0 auto;
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--prose);
+  font-weight: 300;
+}
+
+.prose p {
+  margin-bottom: 1.75rem;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  color: #ffffff;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 200;
+  letter-spacing: -0.025em;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.25;
+}
+
+.prose h1 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+}
+
+.prose h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  border-bottom: 1px solid var(--rim);
+  padding-bottom: 0.5rem;
+}
+
+.prose h3 {
+  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+}
+
+.prose a {
+  color: var(--teal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: opacity 0.2s;
+}
+
+.prose a:hover {
+  opacity: 0.8;
+}
+
+.prose strong {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.prose em {
+  font-family: var(--serif);
+  font-style: italic;
+}
+
+.prose ul,
+.prose ol {
+  margin-bottom: 1.75rem;
+  padding-left: 1.6rem;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+}
+
+.prose li::marker {
+  color: var(--teal);
+}
+
+.prose blockquote {
+  border-left: 2px solid var(--teal);
+  padding: 0.75rem 0 0.75rem 1.5rem;
+  margin: 2rem 0;
+  color: #c4d0ff;
+  background: rgba(45, 212, 191, 0.03);
+  border-radius: 0 4px 4px 0;
+  font-style: italic;
+  font-family: var(--serif);
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--rim);
+  margin: 3.5rem 0;
+}
+
+/* Inline code */
+.prose :not(pre) > code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--teal);
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  border: 1px solid var(--rim);
+}
+
+/* Code blocks (Shiki) */
+.prose pre {
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--rim2);
+  background: #09090f !important;
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  overflow-x: auto;
+  position: relative;
+}
+
+.code-block-wrapper {
+  position: relative;
+  margin: 2rem 0;
+}
+
+.code-block-wrapper pre {
+  margin: 0;
+}
+
+.code-copy-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.7rem;
+  font-family: var(--mono);
+  color: var(--mid);
+  background: rgba(18, 18, 28, 0.85);
+  border: 1px solid var(--rim2);
+  border-radius: 3px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s, color 0.2s, border-color 0.2s;
+  z-index: 5;
+}
+
+.code-block-wrapper:hover .code-copy-btn {
+  opacity: 1;
+}
+
+.code-copy-btn:hover {
+  color: var(--teal);
+  border-color: var(--teal);
+}
+
+.code-copy-btn.copied {
+  color: var(--teal);
+  border-color: var(--teal);
+}
+
+/* KaTeX equations */
+.katex-display {
+  margin: 2rem 0 !important;
+  padding: 1rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  color: #f1f1f8;
+}
+
+.katex {
+  font-size: 1.1em;
+}
+
+/* Tables */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2.5rem 0;
+  font-size: 0.92rem;
+}
+
+.prose th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid var(--rim2);
+  color: #ffffff;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.prose td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--rim);
+  color: var(--prose);
+}
+
+.prose tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Image in prose */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid var(--rim);
+  margin: 2rem 0;
+}

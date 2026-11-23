@@ -1,0 +1,86 @@
+---
+import { siteConfig } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <span class="copyright">
+        &copy; 2026 {siteConfig.author} &middot; {siteConfig.name} ({siteConfig.domain})
+      </span>
+      <span class="subtext">
+        Pure static build &middot; Autonomous systems for science and code
+      </span>
+    </div>
+
+    <div class="footer-right">
+      <a href={siteConfig.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="/blog">Blog</a>
+      <a href="/rss.xml">RSS</a>
+      <a href={`mailto:${siteConfig.email}`}>Email</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--rim);
+    padding: 3.5rem var(--ph);
+    background: var(--bg);
+    position: relative;
+    z-index: 10;
+  }
+
+  .footer-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .copyright {
+    font-size: 0.78rem;
+    color: var(--mid);
+    font-weight: 400;
+  }
+
+  .subtext {
+    font-size: 0.68rem;
+    color: var(--dim);
+    letter-spacing: 0.02em;
+  }
+
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+  }
+
+  .footer-right a {
+    font-size: 0.78rem;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-right a:hover {
+    color: var(--teal);
+  }
+
+  @media (max-width: 600px) {
+    .footer-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+  }
+</style>

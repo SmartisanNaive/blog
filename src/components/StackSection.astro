@@ -1,0 +1,172 @@
+---
+import { stackColumns } from '../data/stack';
+---
+
+<section class="section" id="stack" data-section="04" aria-label="Technology Stack">
+  <div class="section-inner">
+    <div class="sec-kicker">
+      <span class="sec-num">04</span>
+      <span class="sec-label">STACK</span>
+    </div>
+
+    <h2 class="sec-h">
+      <span class="clip-wrap">
+        <span class="clip-inner">Applied tooling &amp;</span>
+      </span>
+      <span class="clip-wrap">
+        <span class="clip-inner roman">technical competencies.</span>
+      </span>
+    </h2>
+
+    <div class="skills-grid">
+      {
+        stackColumns.map((col) => (
+          <div class="skill-col">
+            <h3 class="skill-col-h">{col.title}</h3>
+
+            <div class="skill-list">
+              {col.items.map((item) => (
+                <div class="skill-row">
+                  <div class="skill-top">
+                    <span class="skill-name">{item.name}</span>
+                    <span
+                      class={`skill-badge ${
+                        item.level === 'Daily Driver'
+                          ? 'badge-daily'
+                          : item.level === 'Active'
+                            ? 'badge-active'
+                            : 'badge-exploring'
+                      }`}
+                    >
+                      {item.level}
+                    </span>
+                  </div>
+
+                  <div class="skill-bar">
+                    <div
+                      class="skill-bar-fill"
+                      data-pct={item.pct}
+                      style={`width: ${item.pct}%;`}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--rim);
+    background: var(--bg2);
+  }
+
+  .skill-col {
+    padding: 3rem clamp(1.75rem, 3vw, 2.75rem);
+    border-right: 1px solid var(--rim);
+  }
+
+  .skill-col:last-child {
+    border-right: none;
+  }
+
+  .skill-col-h {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 2.2rem;
+    font-family: var(--mono);
+    font-weight: 500;
+  }
+
+  .skill-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+  }
+
+  .skill-row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .skill-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .skill-name {
+    font-size: 0.82rem;
+    color: var(--prose);
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  .skill-badge {
+    font-size: 0.6rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: 2px;
+    font-family: var(--mono);
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .badge-daily {
+    background: rgba(45, 212, 191, 0.1);
+    color: var(--teal);
+    border: 1px solid rgba(45, 212, 191, 0.25);
+  }
+
+  .badge-active {
+    background: rgba(96, 165, 250, 0.1);
+    color: #60a5fa;
+    border: 1px solid rgba(96, 165, 250, 0.25);
+  }
+
+  .badge-exploring {
+    background: rgba(167, 139, 250, 0.1);
+    color: #a78bfa;
+    border: 1px solid rgba(167, 139, 250, 0.25);
+  }
+
+  .skill-bar {
+    height: 2px;
+    background: var(--rim);
+    overflow: hidden;
+    position: relative;
+    border-radius: 1px;
+  }
+
+  .skill-bar-fill {
+    position: absolute;
+    inset: 0;
+    width: 0%;
+    background: linear-gradient(90deg, rgba(45, 212, 191, 0.4), var(--teal));
+    transform-origin: left;
+  }
+
+  @media (max-width: 900px) {
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+    .skill-col {
+      border-right: none;
+      border-bottom: 1px solid var(--rim);
+    }
+    .skill-col:last-child {
+      border-bottom: none;
+    }
+  }
+</style>

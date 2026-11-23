@@ -1,0 +1,155 @@
+---
+const focusAreas = [
+  {
+    num: '01',
+    category: 'AI FOR SCIENCE & SYNTHETIC BIOLOGY',
+    title: 'Programmable Biology',
+    desc: 'Exploring how foundation models, simulation, and software engineering can make synthetic biology as composable and reproducible as modern software — from biological language models to browser-native mass spectrometry imaging pipelines.',
+    tags: ['AI4Science', 'Synthetic Biology', 'Bio-LMs', 'Edge Bioinformatics'],
+  },
+  {
+    num: '02',
+    category: 'AGENTS & LAB AUTOMATION',
+    title: 'Autonomous Execution Loops',
+    desc: 'Building terminal-first and web-based AI agents connected to physical and simulated lab hardware via Model Context Protocol (MCP), pairing natural-language intent with deterministic simulation gates and 3D physics previews.',
+    tags: ['AI Agents', 'MCP', 'Lab Automation', 'Opentrons Flex'],
+  },
+  {
+    num: '03',
+    category: 'NLP, MACHINE LEARNING & DEEP LEARNING',
+    title: 'Applied Intelligence & Tooling',
+    desc: 'Designing practical NLP utilities, multi-agent harnesses, and deep learning pipelines that turn messy text, code, and high-dimensional scientific datasets into reliable, automated developer and research workflows.',
+    tags: ['NLP', 'Deep Learning', 'Machine Learning', 'Developer Tooling'],
+  },
+];
+---
+
+<section class="section" id="focus" data-section="02" aria-label="Core Focus Areas">
+  <div class="section-inner">
+    <div class="sec-kicker">
+      <span class="sec-num">02</span>
+      <span class="sec-label">FOCUS</span>
+    </div>
+
+    <h2 class="sec-h">
+      <span class="clip-wrap">
+        <span class="clip-inner">Core research &amp;</span>
+      </span>
+      <span class="clip-wrap">
+        <span class="clip-inner roman">engineering threads.</span>
+      </span>
+    </h2>
+
+    <div class="timeline" id="focus-timeline">
+      <div class="timeline-rail" aria-hidden="true">
+        <div class="timeline-rail-fill" id="focus-rail-fill"></div>
+      </div>
+
+      {
+        focusAreas.map((area) => (
+          <div class="tl-item focus-item">
+            <div class="tl-node" aria-hidden="true"></div>
+            <span class="tl-date">{area.num} &middot; {area.category}</span>
+            <h3 class="tl-role">{area.title}</h3>
+            <p class="tl-desc">{area.desc}</p>
+            <div class="tag-cloud">
+              {area.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    position: relative;
+    padding-left: clamp(2rem, 5vw, 3.5rem);
+    margin-top: 1rem;
+  }
+
+  .timeline-rail {
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 1px;
+    background: var(--rim);
+  }
+
+  .timeline-rail-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 0%;
+    background: linear-gradient(180deg, var(--teal), rgba(45, 212, 191, 0.1));
+    box-shadow: 0 0 12px rgba(45, 212, 191, 0.5);
+  }
+
+  .tl-item {
+    position: relative;
+    padding: 0 0 clamp(3.5rem, 7vh, 5rem) clamp(2rem, 4vw, 3rem);
+  }
+
+  .tl-item:last-child {
+    padding-bottom: 0;
+  }
+
+  .tl-node {
+    position: absolute;
+    left: calc(-1 * clamp(2rem, 5vw, 3.5rem) - 4px);
+    top: 0.35rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--rim2);
+    transition:
+      background 0.4s,
+      border-color 0.4s,
+      box-shadow 0.4s,
+      transform 0.4s var(--ease);
+  }
+
+  :global(.tl-item.is-active) .tl-node {
+    background: var(--teal);
+    border-color: var(--teal);
+    box-shadow:
+      0 0 0 4px rgba(45, 212, 191, 0.15),
+      0 0 16px rgba(45, 212, 191, 0.6);
+    transform: scale(1.2);
+  }
+
+  .tl-date {
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--teal);
+    opacity: 0.9;
+    margin-bottom: 0.85rem;
+    display: block;
+    font-family: var(--mono);
+  }
+
+  .tl-role {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+    font-weight: 200;
+    font-style: italic;
+    color: var(--prose);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+
+  .tl-desc {
+    font-size: 0.92rem;
+    color: var(--mid);
+    line-height: 1.75;
+    max-width: 680px;
+    margin-bottom: 1.25rem;
+  }
+</style>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06060a"/>
+      <stop offset="50%" stop-color="#0c0d16"/>
+      <stop offset="100%" stop-color="#08080f"/>
+    </linearGradient>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#60a5fa" stop-opacity="0.2"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <circle cx="400" cy="225" r="280" fill="url(#glow)"/>
+  
+  <!-- Grid overlay -->
+  <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
+    <line x1="100" y1="0" x2="100" y2="450"/>
+    <line x1="250" y1="0" x2="250" y2="450"/>
+    <line x1="400" y1="0" x2="400" y2="450"/>
+    <line x1="550" y1="0" x2="550" y2="450"/>
+    <line x1="700" y1="0" x2="700" y2="450"/>
+    <line x1="0" y1="90" x2="800" y2="90"/>
+    <line x1="0" y1="180" x2="800" y2="180"/>
+    <line x1="0" y1="270" x2="800" y2="270"/>
+    <line x1="0" y1="360" x2="800" y2="360"/>
+  </g>
+
+  <!-- Opentrons Flex Deck & Liquid Handling Simulation Geometry -->
+  <rect x="220" y="110" width="360" height="230" rx="8" fill="#10101b" stroke="rgba(45,212,191,0.3)" stroke-width="1.5"/>
+  <!-- Deck slots (12 slots) -->
+  <g fill="#171828" stroke="rgba(255,255,255,0.08)" stroke-width="1">
+    <rect x="245" y="130" width="65" height="45" rx="3"/>
+    <rect x="325" y="130" width="65" height="45" rx="3"/>
+    <rect x="405" y="130" width="65" height="45" rx="3"/>
+    <rect x="485" y="130" width="65" height="45" rx="3"/>
+
+    <rect x="245" y="190" width="65" height="45" rx="3"/>
+    <rect x="325" y="190" width="65" height="45" rx="3" fill="rgba(45,212,191,0.12)" stroke="#2dd4bf" stroke-width="1.5"/>
+    <rect x="405" y="190" width="65" height="45" rx="3"/>
+    <rect x="485" y="190" width="65" height="45" rx="3"/>
+
+    <rect x="245" y="250" width="65" height="45" rx="3"/>
+    <rect x="325" y="250" width="65" height="45" rx="3"/>
+    <rect x="405" y="250" width="65" height="45" rx="3"/>
+    <rect x="485" y="250" width="65" height="45" rx="3"/>
+  </g>
+
+  <!-- Gantry coordinate lines -->
+  <line x1="160" y1="212" x2="640" y2="212" stroke="#2dd4bf" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.6"/>
+  <line x1="357" y1="70" x2="357" y2="380" stroke="#2dd4bf" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.6"/>
+  <circle cx="357" cy="212" r="8" fill="#2dd4bf" fill-opacity="0.3" stroke="#2dd4bf" stroke-width="2"/>
+  <circle cx="357" cy="212" r="2" fill="#ffffff"/>
+
+  <!-- Simulation badge -->
+  <rect x="470" y="295" width="90" height="24" rx="12" fill="rgba(45,212,191,0.15)" stroke="#2dd4bf" stroke-width="1"/>
+  <text x="515" y="311" fill="#2dd4bf" font-family="monospace" font-size="10" text-anchor="middle" letter-spacing="1">SIMULATED</text>
+
+  <!-- Title / Label -->
+  <text x="245" y="380" fill="#ffffff" font-family="serif" font-size="20" font-style="italic" font-weight="200">MOSS-Lab</text>
+  <text x="245" y="400" fill="#6e6d7a" font-family="sans-serif" font-size="11" letter-spacing="2">ZERO-HARDWARE DECK SIMULATION</text>
+</svg>

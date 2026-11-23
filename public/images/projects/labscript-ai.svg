@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06060a"/>
+      <stop offset="50%" stop-color="#0c0d16"/>
+      <stop offset="100%" stop-color="#08080f"/>
+    </linearGradient>
+    <radialGradient id="labGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <circle cx="400" cy="225" r="250" fill="url(#labGlow)"/>
+
+  <!-- Left: NL Prompt Box -->
+  <g transform="translate(140, 100)">
+    <rect width="230" height="200" rx="6" fill="#0d0e1c" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+    <text x="20" y="35" fill="#2dd4bf" font-family="monospace" font-size="11" font-weight="bold">Natural Language Intent</text>
+    <line x1="20" y1="48" x2="210" y2="48" stroke="rgba(255,255,255,0.08)"/>
+    <text x="20" y="80" fill="#dddde8" font-family="sans-serif" font-size="12" line-height="1.5">
+      <tspan x="20" dy="0">"Transfer 15 uL buffer</tspan>
+      <tspan x="20" dy="22">from slot 2 well A1-D1</tspan>
+      <tspan x="20" dy="22">to 96-well plate in slot 3,</tspan>
+      <tspan x="20" dy="22">then mix 3 times."</tspan>
+    </text>
+  </g>
+
+  <!-- Center Arrow -->
+  <g transform="translate(385, 190)">
+    <circle cx="15" cy="10" r="16" fill="rgba(45,212,191,0.12)" stroke="#2dd4bf" stroke-width="1"/>
+    <path d="M 10,10 L 20,10 M 16,6 L 20,10 L 16,14" fill="none" stroke="#2dd4bf" stroke-width="2"/>
+  </g>
+
+  <!-- Right: Opentrons Protocol Python Code -->
+  <g transform="translate(430, 100)">
+    <rect width="230" height="200" rx="6" fill="#0d0e1c" stroke="rgba(45,212,191,0.3)" stroke-width="1.5"/>
+    <text x="20" y="35" fill="#34d399" font-family="monospace" font-size="11" font-weight="bold">Opentrons Python API</text>
+    <line x1="20" y1="48" x2="210" y2="48" stroke="rgba(255,255,255,0.08)"/>
+    <g font-family="monospace" font-size="10" fill="#dddde8">
+      <text x="20" y="75" fill="#c084fc">metadata = { ... }</text>
+      <text x="20" y="98" fill="#60a5fa">def run(protocol):</text>
+      <text x="32" y="118" fill="#dddde8">plate = protocol.load_labware(...)</text>
+      <text x="32" y="138" fill="#2dd4bf">p20.transfer(</text>
+      <text x="44" y="158" fill="#dddde8">15, src['A1:D1'], dest,</text>
+      <text x="44" y="178" fill="#2dd4bf">mix_after=(3, 10)</text>
+      <text x="32" y="198" fill="#2dd4bf">)</text>
+    </g>
+  </g>
+
+  <text x="140" y="360" fill="#ffffff" font-family="serif" font-size="20" font-style="italic" font-weight="200">LabScript-AI</text>
+  <text x="140" y="380" fill="#6e6d7a" font-family="sans-serif" font-size="11" letter-spacing="2">SYNTHESIS &amp; VALIDATION OF ROBOTIC WET-LAB PROTOCOLS</text>
+</svg>

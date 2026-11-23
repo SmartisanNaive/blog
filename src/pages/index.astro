@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroStarfield from '../components/HeroStarfield.astro';
+import Marquee from '../components/Marquee.astro';
+import FocusSection from '../components/FocusSection.astro';
+import ProjectsSection from '../components/ProjectsSection.astro';
+import StackSection from '../components/StackSection.astro';
+import WorkflowsSection from '../components/WorkflowsSection.astro';
+import WritingSection from '../components/WritingSection.astro';
+import ElsewhereSection from '../components/ElsewhereSection.astro';
+---
+
+<BaseLayout sectionIndex="00">
+  <HeroStarfield />
+  <Marquee />
+  <FocusSection />
+  <ProjectsSection />
+  <StackSection />
+  <WorkflowsSection />
+  <WritingSection />
+  <ElsewhereSection />
+</BaseLayout>
+
+<script>
+  import { initStarfield } from '../scripts/starfield';
+  import {
+    initLenis,
+    initPageLoader,
+    heroEntrance,
+    initScrollAnimations,
+  } from '../scripts/motion';
+
+  // Initialize smooth scroll & starfield canvas
+  initLenis();
+  initStarfield();
+
+  // Run page loader with hero entrance callback
+  initPageLoader(() => {
+    heroEntrance();
+    initScrollAnimations();
+  });
+</script>
